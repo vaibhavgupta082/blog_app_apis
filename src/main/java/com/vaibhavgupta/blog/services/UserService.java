@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.vaibhavgupta.blog.payload.UserDto;
 
+
 public interface UserService {
 	
 	UserDto createUser(UserDto user); 
