@@ -1,5 +1,6 @@
 package com.vaibhavgupta.blog.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,15 @@ public class UserController {
 		return new ResponseEntity(Map.of("message","user deleted successfully"),HttpStatus.OK);
 	}
 	
-
+	@GetMapping("/{userId}")
+	public ResponseEntity<UserDto> getUserById(@PathVariable("userId") Integer userId){
+		UserDto user = this.userService.getUserById(userId);
+		return new ResponseEntity<>(user,HttpStatus.OK);
+	}
+	
+	@GetMapping("/")
+	public ResponseEntity<List<UserDto>> allUsers(){
+		List<UserDto> users = this.userService.getUserList();
+		return new ResponseEntity<>(users,HttpStatus.OK);
+	}
 }
