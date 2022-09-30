@@ -3,6 +3,7 @@ package com.vaibhavgupta.blog.services.impl;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepo userRepo; 
+	
+	@Autowired
+	private ModelMapper mapper;
 	@Override
 	public UserDto createUser(UserDto userdto) {
 		// TODO Auto-generated method stub
@@ -64,23 +68,24 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	private User dtoToUser(UserDto userDto) {
-		User user = new User();
-		user.setId(userDto.getId());
-		user.setName(userDto.getName());
-		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
-		user.setAbout(userDto.getAbout());
+		
+		User user = this.mapper.map(userDto, User.class);
+//		user.setId(userDto.getId());
+//		user.setName(userDto.getName());
+//		user.setEmail(userDto.getEmail());
+//		user.setPassword(userDto.getPassword());
+//		user.setAbout(userDto.getAbout());
 		return user;
 		
 	}
 	
 	public UserDto userToDto(User user) {
-		UserDto userdto = new UserDto();
-		userdto.setId(user.getId());
-		userdto.setName(user.getName());
-		userdto.setPassword(user.getPassword());
-		userdto.setEmail(user.getEmail());
-		userdto.setAbout(user.getAbout());
+		UserDto userdto =this.mapper.map(user, UserDto.class);
+//		userdto.setId(user.getId());
+//		userdto.setName(user.getName());
+//		userdto.setPassword(user.getPassword());
+//		userdto.setEmail(user.getEmail());
+//		userdto.setAbout(user.getAbout());
 		
 		return userdto;
 	}

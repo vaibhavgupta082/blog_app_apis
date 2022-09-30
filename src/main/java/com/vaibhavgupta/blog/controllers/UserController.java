@@ -3,6 +3,8 @@ package com.vaibhavgupta.blog.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,7 @@ public class UserController {
 	
 	//POST-Create
 	@PostMapping("/")
-	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userdto){
+	public ResponseEntity<UserDto> createUser(@Valid @RequestBody UserDto userdto){
 		UserDto createdUser = this.userService.createUser(userdto);
 		return new ResponseEntity<>(createdUser,HttpStatus.CREATED);
 	}
